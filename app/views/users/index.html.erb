@@ -1,0 +1,54 @@
+<h1>Users</h1>
+<div id="users">
+  <table class= "table  table-hover" >
+    <thead>
+      <tr>
+        
+        <th colspan=8>
+          <%= search_form_for @q do |f| %>
+            <%= f.search_field :fName_or_lName_cont ,placeholder: "Search here",style:"padding-left:10px"%>
+            <%= f.submit %>
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+      <th colspan=8></th>
+      </tr>
+      <tr class="text-center">
+        <th>Name</th>
+        <th>Role</th>
+        <th>Gender</th>
+        <th>Age </th>
+        <th colspan="4" >Actions</th>
+      </tr>
+    </thead>
+
+    <tbody class="text-center">
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+          <%if user.fName? || user.lName %>
+          <%= "#{user.fName.capitalize()}  #{user.lName.capitalize()}"%>
+          <% end %>
+           </td>
+          <td><%= user.role.name %></td>
+          <td><%= user.gender.first %></td>
+          <td> 
+              <%= user.dateOfBirth && ((Time.zone.now - user.dateOfBirth.to_time)/1.year.seconds).floor %>
+          </td>
+          <td><%= link_to 'Show Profile' , user,class:"btn btn-outline-primary" %></td>
+          <td><%= link_to 'Edit User', edit_user_path(user),class:"btn btn-outline-secondary"%></td>
+          <td><%= link_to 'Remove User', user, "data-turbo-method": :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-outline-danger"%></td>
+          <td>
+              <%= link_to 'Profile as PDF', user_path(user, format: :pdf), class:"btn btn-dark" %>    
+         </td>  
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @users %>
+<br>
+<%= link_to "PDF", users_path(format: :pdf), class:"btn btn-outline-success" %>
+<%= link_to "Add New user", new_user_path, class:"btn btn-outline-dark" %>

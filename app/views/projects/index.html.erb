@@ -1,0 +1,53 @@
+<h1>Projects</h1>
+
+<div id="projects">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th colspan=8>
+        <%= search_form_for @q do |f| %>
+          <%= f.search_field :name_or_price_or_description_cont ,placeholder: "Search here",style:"padding-left:10px"%>
+          <%= f.submit %>
+        <% end %>
+      </th>
+    </tr>
+    <tr>
+      <th colspan=8></th>
+    </tr>
+    <tr class="text-center">
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Programmer</th>
+      <th colspan="4" class="text-center">Actions </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr class="text-center">
+        <td><%= project.name %></td>
+        <td><%= project.description %></td>
+        <td><%= project.price %> $</td>
+        <td><%= "#{project.user.fName.capitalize()}  #{project.user.lName.capitalize()}"%></td>
+        <td><%= link_to 'Show', project,class:"btn btn-outline-primary" %></td>
+        <td>
+          <% if can? :update, project %>
+            <%= link_to 'Edit', edit_project_path(project),class:"btn btn-outline-secondary" %>
+          <% end %>
+        </td>
+        <td>
+          <% if can? :destroy, project %>
+          <%= link_to 'Destroy', project, "data-turbo-method": :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-outline-danger"%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<%= paginate @projects %>
+<% if can? :create, Project %>
+  <%= link_to 'List new project', new_project_path ,class:"btn btn-outline-success"%>
+<% end %>

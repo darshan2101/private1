@@ -1,0 +1,30 @@
+
+<h1>Expertises</h1>
+
+<div id="expertises">
+<table class="table table-hover text-center">
+  <thead>
+  <tr>
+    <th>Name </th>
+    <th colspan=3>Actions</th>
+  </tr>
+  <tr>
+  <th colspan=4></th>
+  </tr>
+  </thead>
+  <tbody>
+      <% @expertises.each do |expertise| %>
+      <tr>
+        <td> <%= expertise.name %> </td>
+
+        <td> <%= link_to "Show", expertise ,class:"btn btn-outline-primary"%></td>
+        <td><%= link_to "Edit", edit_expertise_path(expertise) ,class:"btn btn-outline-secondary"%></td>
+        <td><%= link_to 'Destroy', expertise, "data-turbo-method": :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-outline-danger"%></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<br>
+<%= link_to "New expertise", new_expertise_path ,class:"btn btn-outline-success" %>

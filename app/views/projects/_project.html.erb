@@ -1,0 +1,22 @@
+<div id="<%= dom_id project %>">
+  <p>
+    <strong>Name:</strong>
+    <%= project.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= project.description %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= project.price %> $
+  </p>
+
+  <p>
+    <strong>Programmer :</strong>
+    <%= "#{project.user.fName.capitalize()}  #{project.user.lName.capitalize()}"%>
+  </p>
+
+</div>

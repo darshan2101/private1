@@ -1,0 +1,18 @@
+<div class="container m-1">
+  <%= render @user %>
+</div>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) ,class:"btn btn-outline-success m-1" %> |
+  <% if current_user&.admin? %>
+    <%= link_to "Back to users", users_path ,class:"btn btn-outline-dark m-1" %> |
+  <% else %>
+    <%= link_to "Back to Homepage", root_path ,class:"btn btn-outline-dark m-1" %> |
+  <% end %>
+  <%= link_to "Destroy this user", @user, data: {:turbo_method => :delete} ,class:"btn btn-outline-danger m-1" %>
+</div>
+<div class="container">
+<% if current_user&.admin? || current_user.id == @user.id %>
+<%= link_to "Download Profile as PDF", user_path(format: :pdf), class:"btn btn-outline-secondary" %>
+<% end %>
+</div>

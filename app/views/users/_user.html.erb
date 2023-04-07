@@ -1,0 +1,63 @@
+<div id="<%= dom_id user %>">
+  <p>
+    <strong>First Name:</strong>
+    <%= @user.fName %>
+  </p>
+  <p>
+    <strong>Last Name:</strong>
+    <%= @user.lName %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Role:</strong>
+    <%= @user.role.name %>
+  </p>
+  <p>
+    <strong>Gender:</strong>
+    <%= @user.gender %>
+  </p>
+  <p>
+    <strong>Date of Birth:</strong>
+    <%= @user.dateOfBirth %>
+  </p>
+  <p>
+    <strong>Contact No:</strong>
+    <%= @user.contact %>
+  </p>
+
+  <p>
+    <strong>Expertise :</strong>
+    <%= @user.expertises.map(&:name).sort.join(", ") %>
+
+  <p>
+    <strong>Joined on:</strong>
+    <%= @joined_on %>
+  </p>
+
+  <p>
+    <strong>Last logged in on:</strong>
+    <%= @last_login %>
+  </p>
+
+  <p>
+    <strong>No. times logged in:</strong>
+    <%= @user.sign_in_count %>
+  </p>
+  <p>
+    <strong> Addresses </strong><br>
+      <% @user.addresses.each do |address| %>
+      <br>
+        <%= address.local %> <br>
+        <%= address.city %> - <%= address.pincode %> <br>
+          <%= address.state %> <br>
+          <%= address.country %>
+      <% end %>
+  </p>
+ 
+
+</div>

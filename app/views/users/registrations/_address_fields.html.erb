@@ -1,0 +1,27 @@
+<div class="nested-fields">
+    <%= form.hidden_field :_destroy %>
+    <div class="p-2">
+        <%= form.label :local %>
+        <%= form.text_field :local %>
+    </div>
+    <div class="p-2">
+        <%= form.label :city %>
+        <%= form.text_field :city %>
+    </div>
+    <div class="p-2">
+        <%= form.label :state %>
+        <%= form.text_field :state %>
+    </div>
+    <div class="p-2">
+        <%= form.label :country %>
+        <%= form.text_field :country %>
+    </div>
+    <div class="p-2">
+        <%= form.label :pincode %>
+        <%= form.number_field :pincode %>
+    </div>
+    <div class="p-2">
+        <strong><%= form.label "Remove" %></strong>
+        <%= form.check_box :_destroy %>
+    </div>
+</div>

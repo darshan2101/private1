@@ -1,0 +1,52 @@
+<h1>Admin#welcome</h1>
+
+<p>
+  <%= @greeting %>
+</p>
+
+<p>
+    <strong>First Name:</strong>
+    <%= @user.fName %>
+  </p>
+  <p>
+    <strong>Last Name:</strong>
+    <%= @user.lName %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Role:</strong>
+    <%= @user.role.name %>
+  </p>
+  <p>
+    <strong>Gender:</strong>
+    <%= @user.gender %>
+  </p>
+  <p>
+    <strong>Date of Birth:</strong>
+    <%= @user.dateOfBirth %>
+  </p>
+  <p>
+    <strong>Contact No:</strong>
+    <%= @user.contact %>
+  </p>
+
+  <p>
+    <strong>Expertise :</strong>
+    <%= @user.expertises.map(&:name).sort.join(", ") %>
+
+
+  <p>
+    <strong> Addresses </strong><br>
+    <% @user.addresses.each do |address| %>
+    <br>
+      <%= address.local %> <br>
+      <%= address.city %> - <%= address.pincode %> <br>
+        <%= address.state %> <br>
+        <%= address.country %>
+    <% end %>
+  </p>

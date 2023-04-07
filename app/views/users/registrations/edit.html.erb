@@ -1,0 +1,98 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |form| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+  
+  <div class="field  mt-1">
+    <strong><%= form.label "First Name" %></strong><br />
+    <%= form.text_field :fName %>
+  </div>
+  <div class="field  mt-1">
+    <strong><%= form.label "Last Name" %></strong><br />
+    <%= form.text_field :lName %>
+  </div>
+
+  <div class="field  mt-1">
+    <strong><%= form.label :email %></strong><br />
+    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field  mt-1">
+    <strong><%= form.label :password %> </strong><i>(leave blank if you don't want to change it)</i><br />
+    <%= form.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field  mt-1">
+    <strong><%= form.label :password_confirmation %></strong><br />
+    <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field  mt-1">
+    <strong><%= form.label :current_password %> </strong><i>(we need your current password to confirm your changes)</i><br />
+    <%= form.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+
+  <div class="field  mt-1">
+    <strong><%= form.label :contact %></strong><br />
+    <%= form.number_field :contact,maximum: 10,minimum: 10 %>
+  </div>
+
+  <div class="field  mt-1">
+    <strong><%= form.label :gender %></strong><br />
+    <%= form.radio_button :gender, 'Male' ,class:"mp-2" %> Male 
+    <%= form.radio_button :gender, 'Female',class:"mp-2" %> Female 
+    <%= form.radio_button :gender, 'Other',class:"mp-2" %> Other<br />
+  </div>
+
+  <div class="field  mt-1">
+    <strong><%= form.label :dateOfBirth %></strong><br />
+    <%= form.date_field :dateOfBirth  %> <br>
+  </div>
+
+  <div class="field  mt-1">
+    <strong><%= form.label "Area of Expertise" %></strong><br />
+    <%= form.collection_check_boxes :expertise_ids, Expertise.all, :id, :name do |b| %>
+      <div class="collection-check-box">
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
+    <% end %>
+  </div>
+   <fieldset class="field  mt-1">
+        <strong>Address:</strong>
+        <%= form.fields_for :addresses do |addresses_form| %>
+            <%= render "address_fields", form: addresses_form %>
+        <% end %>
+        <%= link_to_add_fields "Add Addresses", form, :addresses %>
+
+    </fieldset>
+
+<br>
+  <div class="actions mt-1">
+    <%= form.submit "Update" %>
+  </div>
+<% end %>
+
+<div class="container mt-2">
+  <% if current_user&.admin? || current_user.id == @user.id %>
+    <%= link_to "Download Profile as PDF", user_path(current_user.id,format: :pdf), class:"btn btn-outline-secondary" %>
+  <% end %>
+</div>
+<div>
+  <h3>Cancel my account</h3>
+
+<div>Unsatisfied? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div> <br>
+<% if current_user&.admin?  %>
+  <a class="btn btn-dark" href="/admin/users"> Back </a>
+<% end %>
+</div>
+

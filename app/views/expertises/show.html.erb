@@ -1,0 +1,9 @@
+<%= render @expertise %>
+
+<div>
+  <%= link_to "Edit this expertise", edit_expertise_path(@expertise) ,class:"btn btn-outline-secondary m-1"%> |
+  <%= link_to "Back to expertises", expertises_path ,class:"btn btn-outline-dark m-1"%> |
+<% if @current_user&.admin? %>
+  <%= link_to "Destroy this expertise", @expertise, method: :delete,class:"btn btn-outline-danger m-1" %>
+<% end %>
+</div>
