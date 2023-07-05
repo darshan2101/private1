@@ -92,8 +92,13 @@ gem 'prawn',"~> 2.4"
 
 gem "wicked_pdf", "~> 2.6"
 
-
-
-gem "cssbundling-rails", "~> 1.1"
-
 gem "foreman", "~> 0.87.2"
+
+gem "sass-rails", "~> 6.0"
+gem "sassc-rails", "~> 2.1"
+
+gem "bootstrap", "~> 5.2"
+
+gem "bootstrap-icons", "~> 1.0"
+
+gem "sass", "~> 3.7"
