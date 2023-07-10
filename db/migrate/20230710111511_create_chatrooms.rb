@@ -1,6 +1,6 @@
-class CreateExpertises < ActiveRecord::Migration[7.0]
+class CreateChatrooms < ActiveRecord::Migration[7.0]
   def change
-    create_table :expertises do |t|
+    create_table :chatrooms do |t|
       t.string :name
       t.boolean :is_deleted,default: false
       t.datetime :deleted_at

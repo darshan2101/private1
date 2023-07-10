@@ -7,11 +7,4 @@ class HomeChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def speak(data)
-    ActionCable.server.broadcast('home_channel', data)
-  end
-
-  def recieve(data)
-    ActionCable.server.broadcast('home_channel', data)
-  end
 end

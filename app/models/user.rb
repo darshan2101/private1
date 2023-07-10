@@ -36,4 +36,9 @@ class User < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     [ "fName", "lName" ]
   end
+
+  def username
+    self.email.split("@").first
+  end
+  
 end
