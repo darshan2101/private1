@@ -10,49 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_103309) do
-  create_table "addresses", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_085142) do
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "local"
     t.string "city"
     t.string "state"
     t.string "country"
-    t.integer "pincode", limit: 6
-    t.integer "user_id", null: false
+    t.bigint "pincode"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "expertises", force: :cascade do |t|
+  create_table "expertises", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "expertises_users", id: false, force: :cascade do |t|
-    t.integer "expertise_id", null: false
-    t.integer "user_id", null: false
+  create_table "expertises_users", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "expertise_id", null: false
+    t.bigint "user_id", null: false
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.decimal "price", precision: 5, scale: 2
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.integer "role_id", null: false
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_103309) do
     t.datetime "remember_created_at"
     t.string "fName"
     t.string "lName"
-    t.integer "contact"
+    t.string "contact", limit: 10, null: false
     t.string "gender"
     t.date "dateOfBirth"
     t.string "skill"
