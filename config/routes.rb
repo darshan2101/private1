@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  resources :chatrooms
+  resources :chatrooms do 
+    resource :chatroom_users
+    resources :messages
+  end
   resources :expertises
   # get 'welcome/home'
   resources :projects

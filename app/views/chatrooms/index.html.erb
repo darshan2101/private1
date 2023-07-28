@@ -1,14 +1,35 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Chatrooms</h1>
 
 <div id="chatrooms">
-  <% @chatrooms.each do |chatroom| %>
-    <%= render chatroom %>
-    <p>
-      <%= link_to "Show this chatroom", chatroom %>
-    </p>
-  <% end %>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr class='text-center'>
+        <th>Name</th>
+        <th colspan=5> Actions </th>
+      </tr>
+      <tr>
+        <th colspan=6></th>
+      </tr>
+    </thead>
+
+    <tbody >
+      <% @chatrooms.each do |chatroom| %>
+        <tr>
+          <td> <%= chatroom.name %> </td>
+          <td> <%= link_to "Show detail", chatroom, class:"btn btn-outline-primary"  %> </td>
+          <% if current_user&.admin? %>
+            <td><%= link_to 'Edit Detail', edit_chatroom_path(chatroom),class:"btn btn-outline-secondary"%></td>
+            <td><%= link_to 'Delete Chatroom', chatroom_path(chatroom),class:"btn btn-outline-danger"%></td>
+          <% end %>
+          <td> <%= button_to 'Join' ,chatroom_chatroom_users_path(chatroom) , :method => :post , class:"btn btn-outline-dark" %> </td>
+          <td> <%= button_to 'Leave' ,chatroom_chatroom_users_path(chatroom) , :method => :delete , class:"btn btn-outline-dark" %> </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
 </div>
 
-<%= link_to "New chatroom", new_chatroom_path %>
+<%= link_to "New chatroom", new_chatroom_path ,class:"btn btn-outline-success"%>

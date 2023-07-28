@@ -4,3 +4,11 @@ import "controllers"
 import "channels"
 
 import * as bootstrap from "bootstrap"
+document.getElementById("new_message").addEventListener("keypress", function(e) {
+    if (e && e.key === "Enter") {
+        e.stopPropagation();
+        e.preventDefault();
+        this.submit();
+        console.log(e.key);
+    }
+});

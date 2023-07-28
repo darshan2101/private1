@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:trackable
   has_many :projects, dependent: :destroy
+  has_many :chatroom_users
+  has_many :chatrooms,through: :chatroom_users
+  has_many :messages
   belongs_to :role ,optional: true
   before_save :assign_role
   has_and_belongs_to_many :expertises
@@ -40,5 +43,5 @@ class User < ApplicationRecord
   def username
     self.email.split("@").first
   end
-  
+
 end

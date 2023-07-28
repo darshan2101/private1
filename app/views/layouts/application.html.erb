@@ -10,8 +10,8 @@
   </head>
 
   <body>
-      <div class="flex-container mb-5" >
-        <header class="d-flex flex-row-reverse" style="background-color: #e3f2fd">
+      <div class="flex-container mb-5 fixed-top" >
+        <header class="d-flex flex-row-reverse " style="background-color: #e3f2fd">
           <div class="p-3">
             <% if user_signed_in? %>
               Hello <%=current_user.role.name%> : <%= "#{current_user.fName.capitalize()}  #{current_user.lName.capitalize()}"%>. <br>
@@ -28,17 +28,20 @@
 
           <div class="p-3"> 
             <% if user_signed_in? %>
-              <% if  @current_user.admin? %>
+              <% if  current_user.admin? %>
                 <nav>
                   <a  class="btn btn-secondary m-1" href="/projects">Projects</a> 
                   <a  class="btn btn-secondary m-1" href="/admin/users">Users</a> 
                   <a  class="btn btn-secondary m-1" href="/roles">Roles</a> 
                   <a  class="btn btn-secondary m-1" href="/expertises">Expertise</a>
+                  <a  class="btn btn-secondary m-1" href="/chatrooms">Chatrooms</a>
+
                 </nav>
                 <% else %>
                   <nav>
                   <a  class="btn btn-secondary m-1" href="/projects">Projects</a> 
                   <a  class="btn btn-secondary m-1" href="/expertises">Expertise</a>
+                  <a  class="btn btn-secondary m-1" href="/chatrooms">Chatrooms</a>
                 </nav>
 
                 <% end %>
@@ -50,10 +53,26 @@
         <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, id: "flash_#{name}" %>
         <% end %>
-
-        <main class="container p-3">
-          <%= yield %>
-        </main>
       </div>
+      <main style="margin-top: 6vw" >
+        <div class="fluid-container p-1 " >
+          <div class="row">
+            <div class="col-sm-2" style= "position: fixed; top:8vw; left:0px; ">
+              <% if user_signed_in? %>
+                <h5> My Chatrooms </h5>
+                <ul>
+                  <% current_user.chatrooms.each do |chatroom| %>
+                    <li> <%= link_to chatroom.name, chatroom %> </li>
+                  <% end %>
+                </ul>
+              <%end%>
+            </div>
+            <div class="col-sm-10 ms-auto" >
+              <%= yield %>
+            </div>
+          <div>
+        </div>      
+      </main>
+      
   </body>
 </html>

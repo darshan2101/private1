@@ -71,5 +71,11 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.assets.compile = true
+  
+  config.after_initialize do
+    Rails.application.assets&.instance_eval do
+      @logger = Logger.new('/dev/null')
+    end
+  end
 
 end

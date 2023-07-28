@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @chatroom %>
-
-<div>
-  <%= link_to "Edit this chatroom", edit_chatroom_path(@chatroom) %> |
-  <%= link_to "Back to chatrooms", chatrooms_path %>
-
-  <%= button_to "Destroy this chatroom", @chatroom, method: :delete %>
+<div class="container m-1">
+  <%= render @chatroom %>
 </div>
+<%# <div> %>
+  <%#= link_to "Back to chatrooms", chatrooms_path ,class:"btn btn-outline-dark m-1" %> 
+
+  <%# if current_user&.admin?  %>
+     <%#= link_to "Edit this chatroom", edit_chatroom_path(@chatroom),class:"btn btn-outline-secondary m-1" %> 
+
+    <%#= button_to "Destroy this chatroom", @chatroom, method: :delete,class:"btn btn-outline-danger m-1" %>
+  <%# end %>
+<%# </div> %>
+<div data-behaviour='messages'>
+
+  <% @chatroom.messages.order(created_at: :desc).limit(10).reverse.each do |message| %>   
+  <div><strong><%= message.user.username %>:</strong> <%= message.body %>
+  <% end %>
+
+</div>
+<%= form_for [@chatroom,Message.new] do |f| %>
+  <%= f.text_area :body ,rows: 1 ,class: 'form-control' ,autofocus: true %>
+<% end %>
